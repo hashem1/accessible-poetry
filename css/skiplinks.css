@@ -1,0 +1,35 @@
+ul#acp_skiplinks {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul#acp_skiplinks > li > a {
+    display:block;
+    width:14em;
+    height:3.5em;
+    border-radius:0 0 .3125em .3125em;
+    background:#eee;
+    text-align:center;
+    box-shadow:0 2px 4px rgba(0,0,0,.4);
+    line-height:3.5em;
+    margin-left:-7em;
+    position:absolute;
+    left:50%;
+    top:-8em;
+    -webkit-transition: all 1s ease;  
+       -moz-transition: all 1s ease;  
+	    -ms-transition: all 1s ease;  
+		 -o-transition: all 1s ease;  
+		 	transition: all 1s ease;
+}
+
+ul#acp_skiplinks a:focus {
+    top:1em;
+    outline:none;
+    text-decoration:underline;
+}
+
+ul#acp_skiplinks a:hover {
+   text-decoration: underline;
+}
