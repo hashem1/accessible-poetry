@@ -1,16 +1,16 @@
 === accessible-poetry ===
-Contributors: digisphere
+Contributors: Amit Moreno
 Tags: Accessibility
 Requires at least: 4.1.1
-Tested up to: 4.1.1
-Stable tag: 1.0.0
+Tested up to: 4.2
+Stable tag: 4.1.1
 License: GPL
 License URI: #
 
 Accessible Poetry for better WordPress websites
 
 == Description ==
-\"Accessible Poetry\" is a WordPress Plugin for better Accessibility. this plugin is still on alpha version (under development).
+\"Accessible Poetry\" is a WordPress Plugin for better Accessibility.
 
 
 == Installation ==
