@@ -67,7 +67,7 @@ jQuery(window).load(function(){
 			echo '<li id="acp-contrast"><button id="dark_remove">' . __('Bright', 'acp') . '</button><button id="dark_class">' . __('Dark', 'acp') . '</button></li>';
 		}
 		echo '</ul>';
-		if( $toolbar_eye ) {
+		if( !$toolbar_eye ) {
 			echo '<button class="acp_hide_toolbar"></button></nav>';
 		}
 		?>');
@@ -87,7 +87,7 @@ if( get_option( 'acp_toolbar', false ) ) {
 	add_shortcode( 'acp_toolbar', 'acp_toolbar_nav' );
 }
 
-if( get_option( 'acp_toolbar_special', false ) ) {
+if( get_option( 'acp_toolbar_fixed', false ) ) {
 	add_action( 'wp_head', 'acp_toolbar_scripts');
 }
 
