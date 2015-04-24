@@ -6,7 +6,7 @@ function acp_fontsizer_scripts() { ?>
 <script type="text/javascript">
 jQuery(window).load(function(){
 	jQuery(function($){
-		$("#acp-fontsizer li.big-letter input").click(function () {
+		$("#acp-fontsizer button.big-letter").click(function () {
 			$('p, h1, h2, h3').each(function () {
 				var fontsize;
 				fontsize = parseInt($(this).css('font-size'));
@@ -15,7 +15,7 @@ jQuery(window).load(function(){
          		});
      		});
  		});
- 		$(".fontSize-nav li.small-letter input").click(function () {
+ 		$("#acp-fontsizer button.small-letter").click(function () {
  			$('p, h1, h2, h3').each(function () {
  				var fontsize;
  				fontsize = parseInt($(this).css('font-size'));
