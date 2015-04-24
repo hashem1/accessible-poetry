@@ -22,14 +22,15 @@ function acp_skiplinks_after_body() {
 		
 		$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
 		$menu_items = wp_get_nav_menu_items($menu->term_id);
-		$menu_list = '<ul id="acp_skiplinks">';
+		$menu_side = get_option( 'acp_skiplinks_side', false );
+		$menu_list = '<ul id="acp_skiplinks" role="navigation" class="' . $menu_side . '">';
 
 		foreach ( (array) $menu_items as $key => $menu_item ) {
 	    	$title = $menu_item->title;
 			$url = $menu_item->url;
 			$menu_list .= '<li><a href="' . $url . '" class="skiplinks">' . $title . '</a></li>';
 		}
-		$menu_list .= '</ul>';
+		$menu_list .= '</ul></nav>';
     } else {
 		$menu_list = '<ul><li>Menu "' . $menu_name . '" not defined.</li></ul>';
     }
