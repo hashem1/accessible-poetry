@@ -21,6 +21,7 @@ function acp_init() {
 	register_setting( 'accessible-poetry', 'acp_fontsizer' );
 	register_setting( 'accessible-poetry', 'acp_removetarget' );
 	register_setting( 'accessible-poetry', 'acp_toolbar' );
+	register_setting( 'accessible-poetry', 'acp_toolbar_special' );
 	register_setting( 'accessible-poetry', 'acp_toolbar_side' );
 	register_setting( 'accessible-poetry', 'acp_toolbar_eye' );
 	register_setting( 'accessible-poetry', 'acp_contrast' );
@@ -28,6 +29,17 @@ function acp_init() {
 	
 }
 add_action( 'admin_init', 'acp_init' );
+
+function acp_locale() {
+  load_plugin_textdomain('acp', FALSE, dirname(plugin_basename(__FILE__)).'/lang/'); 
+}
+add_action( 'plugins_loaded', 'acp_locale' );
+/**
+ * Load plugin textdomain.
+ *
+ * @since 1.0.0
+ */
+
 
 // Add the setting Sub Page
 
@@ -56,17 +68,17 @@ function acp_page_callback() {
 		<div class="plugin-author"><?php _e('Author', 'acp');?>: <a href="http://www.amitmoreno.com/" target="_blank" aria-label="Open the Author Page in a new window">Amit Moreno</a></div>
 	</header>
 	
-	<div class="acp-panel">
+	<section class="acp-panel" tabindex="0">
 		<h1><?php _e('Welcome to Accessible Poetry!', 'acp');?></h1>
 		<p class="lead"><?php _e('Here you can find some general options to perform a better accessibility WordPress website.', 'acp');?></p>
 		<p><?php _e('Please visit our', 'acp');?> <a href="#" role="link" aria-label="<?php _e('Go to our Plugin Page', 'acp');?>"><?php _e('Plugin Page', 'acp');?></a> <?php _e('and ', 'acp');?><a href="#" role="link" aria-label="<?php _e('Rate Us on our Plugin Page', 'acp');?>"><?php _e('Rate Us', 'acp');?></a>.</p>
-	</div>
+	</section>
 	
 	<section>
 		<form method="post" action="options.php">
 			<?php settings_fields( 'accessible-poetry' ); ?>
 			<?php do_settings_sections( 'accessible-poetry' ); ?>
-			<section class="acp-field">
+			<section class="acp-field" tabindex="0">
 				<h3><?php _e('Skiplinks', 'acp');?></h3>
 				<p><?php _e('Before you start, you should check if your theme has already got Skiplinks (you can check it by pressing the Tab button when you land on your home page, the Skiplinks need to be the first links that will be focused to a keyboard surfer).', 'acp');?></p>
 				<div class="acp-field-wrap">
@@ -86,7 +98,50 @@ function acp_page_callback() {
 				</div>
 			</section>
 			
-			<section class="acp-field">
+			<section class="acp-field" tabindex="0">
+				<h3><?php _e('General', 'acp');?></h3>
+				<div class="acp-field-wrap">
+					<input name="acp_fontsizer" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_fontsizer' ) ); ?> />
+					<label for="acp_fontsizer"><?php _e('Include the scripts for changing the font size?', 'acp');?></label>
+				</div>
+				<div class="acp-field-wrap">
+					<input name="acp_contrast" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_contrast' ) ); ?> />
+					<label for="acp_contrast"><?php _e('Include the scripts for changing the Contrast?', 'acp');?></label>
+				</div>
+			</section>
+			
+			<section class="acp-field" tabindex="0">
+				<h3><?php _e('Toolbar', 'acp');?></h3>
+				<div class="acp-field-wrap">
+					<input name="acp_toolbar" id="acp_toolbar" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_toolbar' ) ); ?> />
+					<label for="acp_toolbar"><?php _e('Enable the Toolbar.', 'acp');?></label>
+				</div>
+				
+				<section id="acp-special_toolbar" class="hidden">
+					
+					<h4>Special Toolbar</h4>
+					<div class="acp-field-wrap">
+						<input name="acp_toolbar_special" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_toolbar_special' ) ); ?> />
+						<label for="acp_toolbar_special"><?php _e('Display the Special Toolbar?', 'acp');?></label>
+					</div>
+					<div class="acp-field-wrap">
+						<input name="acp_toolbar_eye" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_toolbar_eye' ) ); ?> />
+						<label for="acp_toolbar_eye"><?php _e('Include the eye button?', 'acp');?></label>
+					</div>
+					<div class="acp-field-wrap">
+						<label for="acp_toolbar_side"><?php _e('Special Toolbar Side', 'acp');?></label>
+						<select id="acp_toolbar_side" name="acp_toolbar_side">
+							<option value="left" <?php if ( get_option('acp_toolbar_side') == 'left' ) echo 'selected="selected"'; ?>>Left</option>
+							<option value="right" <?php if ( get_option('acp_toolbar_side') == 'right' ) echo 'selected="selected"'; ?>>Right</option>
+						</select>
+					</div>
+					<hr />
+					<p>If you don't want to use the Special Toolbar you can embed an accessibility menu to everywhere you want with the shortcode: <code>[acp_toolbar]</code>, or with the php function: <code>&lt;?php acp_toolbar_nav(); ?&gt;</code>.</p>
+					
+				</section>
+			</section>
+			
+			<section class="acp-field" tabindex="0">
 				<h3><?php _e('Links', 'acp');?></h3>
 				<div class="acp-field-wrap">
 					<input name="acp_rolelink" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_rolelink' ) ); ?> />
@@ -98,52 +153,11 @@ function acp_page_callback() {
 				</div>
 			</section>
 			
-			<section class="acp-field">
+			<section class="acp-field" tabindex="0">
 				<h3><?php _e('Images', 'acp');?></h3>
 				<div class="acp-field-wrap">
 					<input name="acp_imagealt" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_imagealt' ) ); ?> />
 					<label for="acp_imagealt"><?php _e('Force alt="" to all Images.', 'acp');?></label>
-				</div>
-			</section>
-			
-			<section class="acp-field">
-				<h3><?php _e('Toolbar', 'acp');?></h3>
-				<div class="acp-field-wrap">
-					<input name="acp_toolbar" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_toolbar' ) ); ?> />
-					<label for="acp_toolbar"><?php _e('Display the ACP Toolbar.', 'acp');?></label>
-				</div>
-				
-				<div class="acp-field-wrap">
-					<label for="acp_toolbar_side"><?php _e('Toolbar Side', 'acp');?></label>
-					<select id="acp_toolbar_side" name="acp_toolbar_side">
-						<option value="left" <?php if ( get_option('acp_toolbar_side') == 'left' ) echo 'selected="selected"'; ?>>Left</option>
-						<option value="right" <?php if ( get_option('acp_toolbar_side') == 'right' ) echo 'selected="selected"'; ?>>Right</option>
-					</select>
-				</div>
-				
-				<div class="acp-field-wrap">
-					<input name="acp_toolbar_eye" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_toolbar_eye' ) ); ?> />
-					<label for="acp_toolbar_eye"><?php _e('Display the Eye button that allows to hide the Toolbar.', 'acp');?></label>
-				</div>
-			</section>
-			
-			<section class="acp-field">
-				<h3><?php _e('Font Sizer', 'acp');?></h3>
-				<div class="acp-field-wrap">
-					<input name="acp_fontsizer" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_fontsizer' ) ); ?> />
-					<label for="acp_fontsizer"><?php _e('Include Scripts for changing the font size.', 'acp');?></label>
-					<p><?php _e('To display the font size buttons use this code in your theme:', 'acp');?></p>
-					<pre><code>&lt;?php ?&gt;</code></pre>
-				</div>
-			</section>
-			
-			<section class="acp-field">
-				<h3><?php _e('Contrast', 'acp');?></h3>
-				<div class="acp-field-wrap">
-					<input name="acp_contrast" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_contrast' ) ); ?> />
-					<label for="acp_contrast"><?php _e('Include Scripts for changing the Contrast.', 'acp');?></label>
-					<p><?php _e('To display the Contrast buttons use this code in your theme:', 'acp');?></p>
-					<pre><code>&lt;?php ?&gt;</code></pre>
 				</div>
 			</section>
 			<?php submit_button(); ?>
@@ -152,6 +166,18 @@ function acp_page_callback() {
 	<footer>
 		<p>Did you find any problem with this plugin? please <a href="#">Tell Us</a> about it.</p>
 	</footer>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+
+	$('#acp_toolbar').click(function() {
+  		$('#acp-special_toolbar').fadeToggle(400);
+	});
+	if ($('#acp_toolbar:checked').val() !== undefined) {
+		$('#acp-special_toolbar').show();
+	}
+
+});
+</script>
 </div>
 <?php
 }
