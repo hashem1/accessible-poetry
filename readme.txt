@@ -10,7 +10,7 @@ License URI: #
 Accessible Poetry for better WordPress websites
 
 == Description ==
-\"Accessible Poetry\" is a WordPress Plugin for better Accessibility.
+Enriches your WordPress with better accessibility options, such as nicely Skiplinks, Font-Sizer, Constrast changer, Custom Toolbar & and many other options.
 
 
 == Installation ==
