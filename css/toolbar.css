@@ -1,0 +1,117 @@
+/*
+ * Plugin: Accessible Poetry
+ * Version: 1.0.0 alpha
+ * Author: Amit Moreno
+ */
+
+/* Accessible Poetry Default Toolbar Settings */
+
+ul#acp_toolbar {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+ul#acp_toolbar .item {
+	float: left;
+	margin-right: 5px;
+}
+ul#acp_toolbar .item button {
+	background: #888;
+	border-radius: 3px;
+	color: #fff;
+	border: 1px solid #fff;
+}
+ul#acp_toolbar .item button:hover {
+	background: #eee;
+	color: #888;
+	border: 1px solid #888;
+}
+
+/* Special Toolbar */
+
+#acp_toolbarWrap {
+	width: 158px;
+	height: 52px;
+	padding: 10px;
+	position: fixed;
+	top: 50%;
+	right: 0;
+	z-index: 99999;
+	background: #eee;
+	margin-top: -28px;
+	box-shadow: 0 2px 0 rgba(204,204,204,1.0);
+	-webkit-transition: all 1s ease;  
+       -moz-transition: all 1s ease;  
+	    -ms-transition: all 1s ease;  
+		 -o-transition: all 1s ease;  
+		 	transition: all 1s ease;
+}
+#acp_toolbarWrap.left {		left: 0;}
+#acp_toolbarWrap.right {	right: 0;}
+
+#acp_toolbarWrap.double {	height: 88px;}
+#acp_toolbarWrap.close {	right: -158px;}
+
+#acp_toolbarWrap.left.close {
+	left: -158px;
+	right: auto;
+}
+#acp_toolbarWrap.right.close {
+	right: -158px;
+	left: auto;
+}
+#acp_toolbarWrap ul#acp_toolbar li {
+	display: block;
+	margin-bottom: 0px;
+}
+#acp_toolbarWrap ul#acp_toolbar li button {
+	background: #fff;
+	border: 1px solid #ccc;
+	font-size: 14px;
+	line-height: 32px;
+	padding: 0 8px;
+	border-radius: 3px;
+	color: #888;
+	text-transform: none;
+}
+#acp_toolbarWrap ul#acp_toolbar li#acp-fontsizer button {
+	margin-right: 2px;
+}
+#acp_toolbarWrap ul#acp_toolbar li#acp-contrast button {
+	margin-right: 2px;
+	font-size: 12px;
+}
+#acp_toolbarWrap button.acp_hide_toolbar {
+	border: 0;
+	color: #aaa;
+	padding: 0;
+	background: #888 url('../img/icon-eye.png') center center no-repeat;
+	background-size: auto 22px;
+	box-shadow: 0 2px 0 rgba(204,204,204,1.0);
+	width: 42px;
+	height: 52px;
+	border-right: 1px solid #ccc;	
+	position: absolute;
+	right: 100%;
+	top: 0;
+}
+#acp_toolbarWrap.left button.acp_hide_toolbar {
+	left: 100%;
+	border-left: 1px solid #ccc;
+}
+#acp_toolbarWrap.right button.acp_hide_toolbar {
+	right: 100%;
+	border-right: 1px solid #ccc;
+}
+#acp_toolbarWrap.double button.acp_hide_toolbar {
+	height: 88px;
+}
+
+/* RTL Settings */
+
+.rtl ul#acp_toolbar .item {
+	float: right;
+	margin-right: auto;
+	margin-left: 5px;
+}
+
