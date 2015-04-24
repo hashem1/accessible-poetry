@@ -16,11 +16,16 @@ function acp_init() {
 	wp_register_style( 'accessible-poetry', plugins_url('style.css', __FILE__) );
 	
 	register_setting( 'accessible-poetry', 'acp_skiplinks' );
+	register_setting( 'accessible-poetry', 'acp_skiplinks_side' );
 	register_setting( 'accessible-poetry', 'acp_rolelink' );
 	register_setting( 'accessible-poetry', 'acp_fontsizer' );
 	register_setting( 'accessible-poetry', 'acp_removetarget' );
 	register_setting( 'accessible-poetry', 'acp_toolbar' );
+	register_setting( 'accessible-poetry', 'acp_toolbar_side' );
+	register_setting( 'accessible-poetry', 'acp_toolbar_eye' );
 	register_setting( 'accessible-poetry', 'acp_contrast' );
+	register_setting( 'accessible-poetry', 'acp_imagealt' );
+	
 }
 add_action( 'admin_init', 'acp_init' );
 
@@ -69,6 +74,16 @@ function acp_page_callback() {
 					<label for="acp_skiplinks"><?php _e('Use Skiplinks', 'acp');?></label>
 				</div>
 				<p><?php _e('After activating this option a new menu will be registered with your built-in "Menus" of WP. You then will need to add "Links" to it that points the area that you want to target to, for example if the Name of the Skiplink is: "Skip to Content", so the value of the link will probably be "#content".', 'acp');?></p>
+				<div class="acp-field-wrap">
+					
+					<label for="acp_skiplinks_side"><?php _e('Skiplinks Side', 'acp');?></label>
+					<select id="acp_skiplinks_side" name="acp_skiplinks_side">
+						<option value="none" <?php if ( get_option('acp_skiplinks_side') == 'none' ) echo 'selected="selected"'; ?>>Center (default)</option>
+						<option value="left" <?php if ( get_option('acp_skiplinks_side') == 'left' ) echo 'selected="selected"'; ?>>Left</option>
+						<option value="right" <?php if ( get_option('acp_skiplinks_side') == 'right' ) echo 'selected="selected"'; ?>>Right</option>
+					</select>
+					
+				</div>
 			</section>
 			
 			<section class="acp-field">
@@ -79,7 +94,15 @@ function acp_page_callback() {
 				</div>
 				<div class="acp-field-wrap">
 					<input name="acp_removetarget" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_removetarget' ) ); ?> />
-					<label for="acp_removetarget"><?php _e('Remove "target" attribute from all links.', 'acp');?></label>
+					<label for="acp_removetarget"><?php _e('Force Open links in current tab (Remove the "target" attribute from all links).', 'acp');?></label>
+				</div>
+			</section>
+			
+			<section class="acp-field">
+				<h3><?php _e('Images', 'acp');?></h3>
+				<div class="acp-field-wrap">
+					<input name="acp_imagealt" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_imagealt' ) ); ?> />
+					<label for="acp_imagealt"><?php _e('Force alt="" to all Images.', 'acp');?></label>
 				</div>
 			</section>
 			
@@ -88,6 +111,19 @@ function acp_page_callback() {
 				<div class="acp-field-wrap">
 					<input name="acp_toolbar" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_toolbar' ) ); ?> />
 					<label for="acp_toolbar"><?php _e('Display the ACP Toolbar.', 'acp');?></label>
+				</div>
+				
+				<div class="acp-field-wrap">
+					<label for="acp_toolbar_side"><?php _e('Toolbar Side', 'acp');?></label>
+					<select id="acp_toolbar_side" name="acp_toolbar_side">
+						<option value="left" <?php if ( get_option('acp_toolbar_side') == 'left' ) echo 'selected="selected"'; ?>>Left</option>
+						<option value="right" <?php if ( get_option('acp_toolbar_side') == 'right' ) echo 'selected="selected"'; ?>>Right</option>
+					</select>
+				</div>
+				
+				<div class="acp-field-wrap">
+					<input name="acp_toolbar_eye" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_toolbar_eye' ) ); ?> />
+					<label for="acp_toolbar_eye"><?php _e('Display the Eye button that allows to hide the Toolbar.', 'acp');?></label>
 				</div>
 			</section>
 			
@@ -126,6 +162,7 @@ include 'inc/acp_skiplinks.php';
 include 'inc/acp_rolelinks.php';
 include 'inc/acp_removetarget.php';
 include 'inc/acp_fontsizer.php';
+include 'inc/acp_imagealt.php';
 
 
 /* Beautiful friend */
