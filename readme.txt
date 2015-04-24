@@ -7,8 +7,6 @@ Stable tag: 4.1.1
 License: GPL 2.0
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Accessible Poetry for better WordPress websites
-
 == Description ==
 Enriches your WordPress with better accessibility options, such as nicely Skiplinks, Font-Sizer, Constrast changer, Custom Toolbar & and many other options.
 
@@ -18,5 +16,3 @@ Enriches your WordPress with better accessibility options, such as nicely Skipli
 2. Upload the zip file via the Plugin upload.
 3. Activate the plugin.
 4. Go to \"Tools > Accessible Poetry\" for more details.
-
-== Installation ==
