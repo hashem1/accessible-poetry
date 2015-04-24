@@ -4,22 +4,41 @@
  * Author: Amit Moreno
  */
 
-.acp-panel {
-	background: #fff;
-	padding: 15px 15px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	margin: 30px 0;
+#accessible-poetry h1 {
+	line-height: 2;
+	margin: 0;
+	font-size: 42px;
+	font-weight: 900;
+	
 }
-.acp-panel p.lead {
-	font-size: 16px;
+#accessible-poetry h2 {
+	line-height: 3;
+	background: #19647E;
+	color: #fff;
+	font-weight: 300;
+	padding: 0 15px;
+	margin: -15px -15px 15px;
 }
+
+
 .acp-field-wrap {
 	padding: 5px 10px;
 }
 .acp-field {
 	padding: 10px 15px 30px;
 	background: #fff;
+	border-radius: 3px;
+	overflow: hidden;
 	border-bottom: 5px solid #ccc;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
+}
+.acp-field p.lead {
+	font-size: 16px;
+}
+.plugin-version span {
+	display: inline-block;
+	background: #F76F8E;
+	border-radius: 3px;
+	padding: 3px 8px;
+	color: #fff;
 }
