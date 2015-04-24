@@ -25,8 +25,8 @@ function acp_toolbar_nav() {?>
 		<?php if( get_option( 'acp_contrast', false ) ) : ?>
 		<div id="acp-contrast" class="item">
 			<label for="acp-contrast">Contrast:</label>
-			<button><?php _e('Bright', 'acp');?></button>
-			<button><?php _e('Dark', 'acp');?></button>
+			<button id="dark_remove"><?php _e('Bright', 'acp');?></button>
+			<button id="dark_class"><?php _e('Dark', 'acp');?></button>
 		</div>
 		<?php endif; ?>
 	</ul>
@@ -64,7 +64,7 @@ jQuery(window).load(function(){
 		    echo '<li id="acp-fontsizer">' . $acp_fontsizer . '</li>';
 		}
 		if( get_option( 'acp_contrast', false ) ) {
-			echo '<li id="acp-contrast"><button>' . __('Bright', 'acp') . '</button><button>' . __('Dark', 'acp') . '</button></li>';
+			echo '<li id="acp-contrast"><button id="dark_remove">' . __('Bright', 'acp') . '</button><button id="dark_class">' . __('Dark', 'acp') . '</button></li>';
 		}
 		echo '</ul>';
 		if( $toolbar_eye ) {
