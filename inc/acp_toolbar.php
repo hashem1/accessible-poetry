@@ -7,10 +7,33 @@
  * Page: Toolbar (inc/acp_toolbar.php)
  */
 
-function acp_register_toolbar_style() {
+function acp_toolbar_style() {
 	wp_register_style( 'acp_toolbar', plugins_url( 'accessible-poetry/css/toolbar.css' ) );
 	wp_enqueue_style( 'acp_toolbar' );
 }
+
+function acp_toolbar_nav() {?>
+<nav id="acp_toolbar_shortcode" role="navigation">
+	<ul id="acp_toolbar">
+		<?php if( get_option( 'acp_fontsizer', false ) ) :?>
+		<div id="acp-fontsizer" class="item">
+			<label for="acp-fontsizer">Font Size:</label>
+			<button class="small-letter">a</button>
+			<button class="big-letter">A</button>
+		</div>
+		<?php endif; ?>
+		<?php if( get_option( 'acp_contrast', false ) ) : ?>
+		<div id="acp-contrast" class="item">
+			<label for="acp-contrast">Contrast:</label>
+			<button><?php _e('Bright', 'acp');?></button>
+			<button><?php _e('Dark', 'acp');?></button>
+		</div>
+		<?php endif; ?>
+	</ul>
+</nav>
+<?php
+}
+
 function acp_toolbar_scripts() {
 
 	// buttons
@@ -60,7 +83,11 @@ jQuery(window).load(function(){
 	endif;
 }
 if( get_option( 'acp_toolbar', false ) ) {
-	add_action( 'wp_enqueue_scripts', 'acp_register_toolbar_style' );
+	add_action( 'wp_enqueue_scripts', 'acp_toolbar_style' );	
+	add_shortcode( 'acp_toolbar', 'acp_toolbar_nav' );
+}
+
+if( get_option( 'acp_toolbar_special', false ) ) {
 	add_action( 'wp_head', 'acp_toolbar_scripts');
 }
 
