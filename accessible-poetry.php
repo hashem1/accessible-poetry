@@ -25,6 +25,16 @@ function acp_init() {
 	register_setting( 'accessible-poetry', 'acp_toolbar_side' );
 	register_setting( 'accessible-poetry', 'acp_toolbar_eye' );
 	register_setting( 'accessible-poetry', 'acp_contrast' );
+	register_setting( 'accessible-poetry', 'acp_contrast_bright' );
+	register_setting( 'accessible-poetry', 'acp_contrast_bright_bg' );
+	register_setting( 'accessible-poetry', 'acp_contrast_bright_text' );
+	register_setting( 'accessible-poetry', 'acp_contrast_bright_link' );
+	register_setting( 'accessible-poetry', 'acp_contrast_disable_bright' );
+	register_setting( 'accessible-poetry', 'acp_contrast_dark' );
+	register_setting( 'accessible-poetry', 'acp_contrast_dark_bg' );
+	register_setting( 'accessible-poetry', 'acp_contrast_dark_text' );
+	register_setting( 'accessible-poetry', 'acp_contrast_dark_link' );
+	register_setting( 'accessible-poetry', 'acp_contrast_disable_dark' );
 	register_setting( 'accessible-poetry', 'acp_imagealt' );
 	
 }
@@ -76,8 +86,10 @@ function acp_page_callback() {
 	
 	<section>
 		<form method="post" action="options.php">
+			
 			<?php settings_fields( 'accessible-poetry' ); ?>
 			<?php do_settings_sections( 'accessible-poetry' ); ?>
+			
 			<section class="acp-field" tabindex="0">
 				<h3><?php _e('Skiplinks', 'acp');?></h3>
 				<p><?php _e('Before you start, you should check if your theme has already got Skiplinks (you can check it by pressing the Tab button when you land on your home page, the Skiplinks need to be the first links that will be focused to a keyboard surfer).', 'acp');?></p>
@@ -87,27 +99,77 @@ function acp_page_callback() {
 				</div>
 				<p><?php _e('After activating this option a new menu will be registered with your built-in "Menus" of WP. You then will need to add "Links" to it that points the area that you want to target to, for example if the Name of the Skiplink is: "Skip to Content", so the value of the link will probably be "#content".', 'acp');?></p>
 				<div class="acp-field-wrap">
-					
 					<label for="acp_skiplinks_side"><?php _e('Skiplinks Side', 'acp');?></label>
 					<select id="acp_skiplinks_side" name="acp_skiplinks_side">
 						<option value="none" <?php if ( get_option('acp_skiplinks_side') == 'none' ) echo 'selected="selected"'; ?>>Center (default)</option>
 						<option value="left" <?php if ( get_option('acp_skiplinks_side') == 'left' ) echo 'selected="selected"'; ?>>Left</option>
 						<option value="right" <?php if ( get_option('acp_skiplinks_side') == 'right' ) echo 'selected="selected"'; ?>>Right</option>
 					</select>
-					
 				</div>
 			</section>
 			
 			<section class="acp-field" tabindex="0">
-				<h3><?php _e('General', 'acp');?></h3>
+				<h3><?php _e('Font Sizer', 'acp');?></h3>
 				<div class="acp-field-wrap">
 					<input name="acp_fontsizer" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_fontsizer' ) ); ?> />
 					<label for="acp_fontsizer"><?php _e('Include the scripts for changing the font size?', 'acp');?></label>
 				</div>
+			</section>	
+			<section class="acp-field">
+				<h3>Contrast</h3>
 				<div class="acp-field-wrap">
-					<input name="acp_contrast" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_contrast' ) ); ?> />
+					<input name="acp_contrast" id="acp_contrast" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_contrast' ) ); ?> />
 					<label for="acp_contrast"><?php _e('Include the scripts for changing the Contrast?', 'acp');?></label>
 				</div>
+				
+				<section id="acp-contrast_options" tabindex="0" class="hidden">
+					<hr />
+					<div class="acp-field-wrap">
+						<input name="acp_contrast_bright" id="acp_contrast_bright" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_contrast_bright' ) ); ?> />
+						<label for="acp_contrast_bright"><?php _e('Use custom colors for the Bright option.', 'acp');?></label>
+					</div>
+					<section id="acp-bright-set" class="hidden">
+						<div class="acp-field-wrap">
+							<input name="acp_contrast_bright_bg" type="text" value=<?php if( get_option( 'acp_contrast_bright_bg' ) ){echo get_option( 'acp_contrast_bright_bg' );} ?> placeholder="default: #fff"  />
+							<label for="acp_contrast_bright_bg"><?php _e('Custom Color for the Background in the Bright option.', 'acp');?></label>
+						</div>
+						<div class="acp-field-wrap">
+							<input name="acp_contrast_bright_text" type="text" value="<?php if( get_option( 'acp_contrast_bright_text' ) ){echo get_option( 'acp_contrast_bright_text' );} ?>" placeholder="default: #333"  />
+							<label for="acp_contrast_bright_text"><?php _e('Custom Color for the Text in the Bright option.', 'acp');?></label>
+						</div>
+						<div class="acp-field-wrap">
+							<input name="acp_contrast_bright_link" type="text" value="<?php if( get_option( 'acp_contrast_bright_link' ) ){echo get_option( 'acp_contrast_bright_link' );} ?>" placeholder="default: website defaults"  />
+							<label for="acp_contrast_bright_link"><?php _e('Custom Color for the Link in the Bright option.', 'acp');?></label>
+						</div>
+						<div class="acp-field-wrap">
+							<input name="acp_contrast_disable_bright" id="acp_contrast_disable_bright" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_contrast_disable_bright' ) ); ?> />
+							<label for="acp_contrast_disable_bright"><?php _e('Don\'t use any style for the Bright option.', 'acp');?></label>
+						</div>
+					</section>
+					<hr />
+					<div class="acp-field-wrap">
+						<input name="acp_contrast_dark" id="acp_contrast_dark" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_contrast_dark' ) ); ?> />
+						<label for="acp_contrast_dark"><?php _e('Use custom colors for the Dark option.', 'acp');?></label>
+					</div>
+					<section id="acp-dark-set" class="hidden">
+						<div class="acp-field-wrap">
+							<input name="acp_contrast_dark_bg" type="text" value="<?php if( get_option( 'acp_contrast_dark_bg' ) ){echo get_option( 'acp_contrast_dark_bg' );} ?>" placeholder="default: #333"  />
+							<label for="acp_contrast_dark_bg"><?php _e('Custom Color for the Background in the Dark option.', 'acp');?></label>
+						</div>
+						<div class="acp-field-wrap">
+							<input name="acp_contrast_dark_text" type="text" value="<?php if( get_option( 'acp_contrast_dark_text' ) ){echo get_option( 'acp_contrast_dark_text' );} ?>" placeholder="default: #fff"  />
+							<label for="acp_contrast_dark_text"><?php _e('Custom Color for the Text in the Dark option.', 'acp');?></label>
+						</div>
+						<div class="acp-field-wrap">
+							<input name="acp_contrast_dark_link" type="text" value="<?php if( get_option( 'acp_contrast_dark_link' ) ){echo get_option( 'acp_contrast_dark_link' );} ?>" placeholder="default: #ffff88"  />
+							<label for="acp_contrast_dark_link"><?php _e('Custom Color for the Link in the Dark option.', 'acp');?></label>
+						</div>
+						<div class="acp-field-wrap">
+							<input name="acp_contrast_disable_dark" id="acp_contrast_disable_dark" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_contrast_disable_dark' ) ); ?> />
+							<label for="acp_contrast_disable_dark"><?php _e('Don\'t use any style for the Dark option.', 'acp');?></label>
+						</div>
+					</section>
+				</section>
 			</section>
 			
 			<section class="acp-field" tabindex="0">
@@ -175,6 +237,27 @@ jQuery(document).ready(function($) {
 	if ($('#acp_toolbar:checked').val() !== undefined) {
 		$('#acp-special_toolbar').show();
 	}
+	
+	$('#acp_contrast').click(function() {
+  		$('#acp-contrast_options').fadeToggle(400);
+	});
+	if ($('#acp_contrast:checked').val() !== undefined) {
+		$('#acp-contrast_options').show();
+	}
+	
+	$('#acp_contrast_bright').click(function() {
+  		$('#acp-bright-set').fadeToggle(400);
+	});
+	if ($('#acp_contrast_bright:checked').val() !== undefined) {
+		$('#acp-bright-set').show();
+	}
+	
+	$('#acp_contrast_dark').click(function() {
+  		$('#acp-dark-set').fadeToggle(400);
+	});
+	if ($('#acp_contrast_dark:checked').val() !== undefined) {
+		$('#acp-dark-set').show();
+	}
 
 });
 </script>
@@ -189,6 +272,7 @@ include 'inc/acp_rolelinks.php';
 include 'inc/acp_removetarget.php';
 include 'inc/acp_fontsizer.php';
 include 'inc/acp_imagealt.php';
+include 'inc/acp_contrast.php';
 
 
 /* Beautiful friend */
