@@ -93,7 +93,7 @@ function acp_page_callback() {
 					<input name="acp_skiplinks" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_skiplinks' ) ); ?> />
 					<label for="acp_skiplinks"><?php _e('Use Skiplinks', 'acp');?></label>
 				</div>
-				<p><?php _e('After activating this option a new menu will be registered with your built-in "Menus" of WP. You then will need to add "Links" to it that points the area that you want to target to, for example if the Name of the Skiplink is: "Skip to Content", so the value of the link will probably be "#content".', 'acp');?></p>
+				<p><?php _e('After activating this option a new menu will be registered with your built-in "Menus" of WP. You then will need to create custom menu and add to it "Links" that points to the area you want to target to, for example if the Name of the Skiplink is: "Skip to Content", so the value of the link will probably be "#content".', 'acp');?></p>
 				<div class="acp-field-wrap">
 					<label for="acp_skiplinks_side"><?php _e('Skiplinks Side', 'acp');?></label>
 					<select id="acp_skiplinks_side" name="acp_skiplinks_side">
