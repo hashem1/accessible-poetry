@@ -7,8 +7,8 @@
 #accessible-poetry h1 {
 	line-height: 2;
 	margin: 0;
-	font-size: 42px;
-	font-weight: 900;
+	font-size: 36px;
+	font-weight: 300;
 	
 }
 #accessible-poetry h2 {
@@ -29,12 +29,25 @@
 	background: #fff;
 	border-radius: 3px;
 	overflow: hidden;
-	border-bottom: 5px solid #ccc;
+	box-shadow: 0 0 2px 1px #ccc;
+	/*border-bottom: 5px solid #ccc;*/
 	margin-bottom: 15px;
 }
 .acp-field p.lead {
 	font-size: 16px;
 }
+.acp-field input[type=checkbox] {
+	width: 24px;
+	height: 24px;
+}
+.acp-field label {
+	cursor: default;
+}
+.acp-field input[type=checkbox]:checked:before {
+	font-size: 28px;
+	line-height: 32px;
+}
+
 .plugin-version span {
 	display: inline-block;
 	background: #F76F8E;
