@@ -90,25 +90,26 @@ function acp_page_callback() {
 				<h2><?php _e('Skiplinks', 'acp');?></h2>
 				<p><?php _e('Before you start, you should check if your theme has already got Skiplinks (you can check it by pressing the Tab button when you land on your home page, the Skiplinks need to be the first links that will be focused to a keyboard surfer).', 'acp');?></p>
 				<div class="acp-field-wrap">
-					<input name="acp_skiplinks" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_skiplinks' ) ); ?> />
-					<label for="acp_skiplinks"><?php _e('Use Skiplinks', 'acp');?></label>
+					<input name="acp_skiplinks" id="acp_skiplinks" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_skiplinks' ) ); ?> />
+					<label for="acp_skiplinks"><?php _e('Enable Skiplinks', 'acp');?></label>
 				</div>
-				<p><?php _e('After activating this option a new menu will be registered with your built-in "Menus" of WP. You then will need to create custom menu and add to it "Links" that points to the area you want to target to, for example if the Name of the Skiplink is: "Skip to Content", so the value of the link will probably be "#content".', 'acp');?></p>
-				<div class="acp-field-wrap">
-					<label for="acp_skiplinks_side"><?php _e('Skiplinks Side', 'acp');?></label>
-					<select id="acp_skiplinks_side" name="acp_skiplinks_side">
-						<option value="none" <?php if ( get_option('acp_skiplinks_side') == 'none' ) echo 'selected="selected"'; ?>>Center (default)</option>
-						<option value="left" <?php if ( get_option('acp_skiplinks_side') == 'left' ) echo 'selected="selected"'; ?>>Left</option>
-						<option value="right" <?php if ( get_option('acp_skiplinks_side') == 'right' ) echo 'selected="selected"'; ?>>Right</option>
-					</select>
-				</div>
+				<section id="acp_skiplinks_active" class="hidden">
+					<p><?php _e('After activating this option a new menu will be registered with your built-in "Menus" of WP. You then will need to create custom menu and add to it "Links" that points to the area you want to target to, for example if the Name of the Skiplink is: "Skip to Content", so the value of the link will probably be "#content".', 'acp');?></p>
+					<div class="acp-field-wrap">
+						<label for="acp_skiplinks_side"><?php _e('Skiplinks Side', 'acp');?></label>
+						<select id="acp_skiplinks_side" name="acp_skiplinks_side">
+							<option value="none" <?php if ( get_option('acp_skiplinks_side') == 'none' ) echo 'selected="selected"'; ?>>Center (default)</option>
+							<option value="left" <?php if ( get_option('acp_skiplinks_side') == 'left' ) echo 'selected="selected"'; ?>>Left</option>
+							<option value="right" <?php if ( get_option('acp_skiplinks_side') == 'right' ) echo 'selected="selected"'; ?>>Right</option>
+						</select>
+					</div>
+				</section>
 			</section>
-			
 			<section class="acp-field" tabindex="0">
 				<h2><?php _e('Font Sizer', 'acp');?></h2>
 				<div class="acp-field-wrap">
 					<input name="acp_fontsizer" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_fontsizer' ) ); ?> />
-					<label for="acp_fontsizer"><?php _e('Include the scripts for changing the font size?', 'acp');?></label>
+					<label for="acp_fontsizer"><?php _e('Enable Font-Sizer', 'acp');?></label>
 					<p>If you wish to use only the Font Sizer wherever you want, you can use the shortcode: <code>[acp_fontsizer]</code> or a direct request to the php function: <code>&lt;?php acp_fontsizer_nav(); ?&gt;</code>.</p>
 				</div>
 			</section>	
@@ -116,7 +117,7 @@ function acp_page_callback() {
 				<h2>Contrast</h2>
 				<div class="acp-field-wrap">
 					<input name="acp_contrast" id="acp_contrast" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_contrast' ) ); ?> />
-					<label for="acp_contrast"><?php _e('Include the scripts for changing the Contrast?', 'acp');?></label>
+					<label for="acp_contrast"><?php _e('Enable Contrast', 'acp');?></label>
 				</div>
 				
 				<section id="acp-contrast_options" tabindex="0" class="hidden">
@@ -178,7 +179,7 @@ function acp_page_callback() {
 				<p>With the Toolbar you can display the Contrast & the Font Sizer options.</p>
 				<div class="acp-field-wrap">
 					<input name="acp_toolbar" id="acp_toolbar" type="checkbox" value="1" <?php checked( '1', get_option( 'acp_toolbar' ) ); ?> />
-					<label for="acp_toolbar"><?php _e('Enable the Toolbar.', 'acp');?></label>
+					<label for="acp_toolbar"><?php _e('Enable Toolbar Options', 'acp');?></label>
 					
 				</div>
 				
@@ -235,6 +236,13 @@ function acp_page_callback() {
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 
+	$('#acp_skiplinks').click(function() {
+  		$('#acp_skiplinks_active').fadeToggle(400);
+	});
+	if ($('#acp_skiplinks:checked').val() !== undefined) {
+		$('#acp_skiplinks_active').show();
+	}
+	
 	$('#acp_toolbar').click(function() {
   		$('#acp-fixed_toolbar').fadeToggle(400);
 	});
