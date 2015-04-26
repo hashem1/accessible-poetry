@@ -20,20 +20,20 @@ function acp_fontsizer_scripts() { ?>
 <script type="text/javascript">
 jQuery(window).load(function(){
 	jQuery(function($){
-		$("#acp-fontsizer button.big-letter").click(function () {
-			$('p, h1, h2, h3').each(function () {
+		jQuery("#acp-fontsizer button.big-letter").click(function () {
+			jQuery('p, h1, h2, h3').each(function () {
 				var fontsize;
-				fontsize = parseInt($(this).css('font-size'));
-				$(this).css({
+				fontsize = parseInt(jQuery(this).css('font-size'));
+				jQuery(this).css({
 					'font-size': (fontsize + 1) + 'px'
          		});
      		});
  		});
- 		$("#acp-fontsizer button.small-letter").click(function () {
- 			$('p, h1, h2, h3').each(function () {
+ 		jQuery("#acp-fontsizer button.small-letter").click(function () {
+ 			jQuery('p, h1, h2, h3').each(function () {
  				var fontsize;
  				fontsize = parseInt($(this).css('font-size'));
- 				$(this).css({
+ 				jQuery(this).css({
  					'font-size': (fontsize - 1) + 'px'
          		});
      		});
